@@ -25,12 +25,11 @@ int	main(void)
         printf("ptr:no such file.\n");
         return 0;
     }
-	// printf("input --> ");
 	for (i = 0; i < NBR_I; i++)
 	{
 		fscanf(ptr, "%d,", &nbr[i]);
 	}
-	
+
 	for (i = 0; i < NBR_I; i++)
 		fishes[i] = nbr[i];
 	oldtop = NBR_I;
