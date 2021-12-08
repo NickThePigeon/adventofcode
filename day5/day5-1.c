@@ -1,7 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int		fill_matrix_vert(int matrix[1000][1000], int x1, int y1, int x2, int y2)
+// #define MATRIX_Y 1000
+// #define MATRIX_X 1000
+// #define POINTS_Y 500
+
+#define MATRIX_Y 10
+#define MATRIX_X 10
+#define POINTS_Y 10
+
+int matrix[MATRIX_Y][MATRIX_X];
+
+int		fill_matrix_vert(int x1, int y1, int x2, int y2)
+{
+	int temp;
+
+	if (y1 > y2)
+	{
+		temp = y1;
+		y1 = y2;
+		y2 = temp;
+	}
+	for (int i = 0; i <= (y2 - y1); i++)
+	{
+		matrix[y1 + i][x1] += 1;
+	}
+	return (0);
+}
+
+int		fill_matrix_horz(int x1, int y1, int x2, int y2)
 {
 	int temp;
 
@@ -11,24 +38,18 @@ int		fill_matrix_vert(int matrix[1000][1000], int x1, int y1, int x2, int y2)
 		x1 = x2;
 		x2 = temp;
 	}
-	for (int i = 0; i < (y2 - y1); i++)
+	for (int i = 0; i <= (x2 - x1); i++)
 	{
-		matrix[y1 + i][x1]++;
+		matrix[y1][x1 + i] += 1;
 	}
-	return (matrix);
+	return (0);	
 }
-
-// int		fill_matrix_horz(int matrix[1000][1000], int x, int y, int len)
-// {
-
-// }
 
 int	main(void)
 {
 	int i,j;
 	char c;
-	int points[500][4];
-	int matrix[1000][1000];
+	int points[POINTS_Y][4];
 
 	FILE	*ptr = fopen("file.txt","r");
     if (ptr == NULL)
@@ -36,29 +57,35 @@ int	main(void)
         printf("ptr:no such file.\n");
         return 0;
     }
-	for (i = 0; i < 500; i++)
+	for (i = 0; i < POINTS_Y; i++)
 		fscanf(ptr, "%d %*c %d %*c %*c %d %*c %d", &points[i][0], &points[i][1], &points[i][2], &points[i][3]);
-	for (i = 0; i < 1000; i++)
+	for (i = 0; i < MATRIX_Y; i++)
 	{
-		for (j = 0; j < 1000; j++)
+		for (j = 0; j < MATRIX_X; j++)
 			matrix[i][j] = 0;
 	}
-	for (i = 0; i < 500; i++)
+	for (i = 0; i < POINTS_Y; i++)
 	{
-		// if (points[i][0] == points[i][2])
-		// {
-		// 	fill_ma
-		// }
-		if (points[i][1] == points[i][3])
+		if (points[i][0] == points[i][2])
 		{
-			matrix = fill_matrix_vert(matrix, points[i][0], points[i][1], points[i][2], points[i][3]);
+			fill_matrix_vert(points[i][0], points[i][1], points[i][2], points[i][3]);
+		}
+		else if (points[i][1] == points[i][3])
+		{
+			fill_matrix_horz(points[i][0], points[i][1], points[i][2], points[i][3]);
 		}
 	}
-	for (i = 0; i < 1000; i++)
+	int count = 0;
+	for (i = 0; i < MATRIX_Y; i++)
 	{
-		for (j = 0; j < 1000; j++)
-			printf("%d ", matrix[i][j]);
-		printf("\n");
+		for (j = 0; j < MATRIX_X; j++)
+		{
+			// printf("%d", matrix[i][j]);
+			if (matrix[i][j] > 1)
+				count++;
+		}
+		// printf("\n");
 	}
+	printf("answer = %d\n", count);
 	return (0);
 }
