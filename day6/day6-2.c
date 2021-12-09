@@ -67,6 +67,8 @@ int	main(void)
 		eight = zero;
 		six = zero;
 		zero = one;
+		printf("numbers = \n");
+		printf("%lld\n%lld\n%lld\n%lld\n%lld\n%lld\n%lld\n%lld\n%lld\n", zero,one,two,three,four,five,six,seven,eight);
 	}
 	printf("nbr of fishes = %lld\n", zero + one + two + three + four + five + six + seven + eight);
 	free(fishes);
