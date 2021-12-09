@@ -64,8 +64,8 @@ int	main(void)
 		four = five;
 		five = six;
 		seven = eight;
-		six = zero;
 		eight = zero;
+		six = zero;
 		zero = one;
 	}
 	printf("nbr of fishes = %lld\n", zero + one + two + three + four + five + six + seven + eight);
