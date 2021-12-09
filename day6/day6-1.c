@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// #define NBR_I 5
-// #define DAYS 18
+#define NBR_I 5
+#define DAYS 18
 // #define DAYS 80
-#define NBR_I 300
-#define DAYS 256
+// #define NBR_I 300
+// #define DAYS 256
 
 int	main(void)
 {
@@ -18,7 +18,7 @@ int	main(void)
 
 
 	fishes = (int *)malloc(sizeof(int) * (9999999999));
-	FILE	*ptr = fopen("file.txt","r");
+	FILE	*ptr = fopen("file_test.txt","r");
 
     if (ptr == NULL)
     {
@@ -48,9 +48,9 @@ int	main(void)
 			else
 				fishes[j]--;
 		}
-		// for (j = 0; j < top; j++)
-		// 	printf("%d", fishes[j]);   
-		// printf("\n");
+		for (j = 0; j < top; j++)
+			printf("%d", fishes[j]);   
+		printf("\n");
 	}
 	printf("nbr of fishes = %lld\n", top);
 	free(fishes);

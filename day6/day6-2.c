@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-#define NBR_I 5
-#define DAYS 18
+// #define NBR_I 5
+// #define DAYS 18
 // #define DAYS 80
-// #define NBR_I 300
-// #define DAYS 256
+#define NBR_I 300
+#define DAYS 256
 
 int	main(void)
 {
@@ -14,10 +15,10 @@ int	main(void)
 	long long oldtop;
 	int *fishes;
 	long long i,j;
-	long long zero,one,two,three,four,five,six,seven,eight;
+	unsigned long long zero,one,two,three,four,five,six,seven,eight;
 
 	fishes = (int *)malloc(sizeof(int) * (300));
-	FILE	*ptr = fopen("file_test.txt","r");
+	FILE	*ptr = fopen("file.txt","r");
 
     if (ptr == NULL)
     {
@@ -56,21 +57,24 @@ int	main(void)
 		else if (nbr[i] == 6)
 			six++;
 	}
+	unsigned long long old_zero = 0;
+	unsigned long long old_eight = 0;
 	for (i = 0; i < DAYS; i++)
 	{
+		old_zero = zero;
+		zero = one;
 		one = two;
 		two = three;
 		three = four;
 		four = five;
 		five = six;
+		six = seven;
 		seven = eight;
-		eight = zero;
-		six = zero;
-		zero = one;
-		printf("numbers = \n");
-		printf("%lld\n%lld\n%lld\n%lld\n%lld\n%lld\n%lld\n%lld\n%lld\n", zero,one,two,three,four,five,six,seven,eight);
+		old_eight = eight;
+		eight = old_zero;
+		six += old_zero;
 	}
-	printf("nbr of fishes = %lld\n", zero + one + two + three + four + five + six + seven + eight);
+	printf("nbr of fishes = %llu\n", (zero + one +two+three+four+five+six+seven+eight));
 	free(fishes);
 	return (0);
 }
